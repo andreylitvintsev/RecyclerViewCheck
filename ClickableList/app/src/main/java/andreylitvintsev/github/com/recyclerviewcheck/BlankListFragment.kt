@@ -1,10 +1,14 @@
 package andreylitvintsev.github.com.recyclerviewcheck
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 
 class BlankListFragment : ListFragment<BlankListFragment.BlankViewHolder>() {
 
@@ -41,11 +45,29 @@ class BlankListFragment : ListFragment<BlankListFragment.BlankViewHolder>() {
         }
 
         override fun onBindViewHolder(holder: BlankViewHolder, position: Int) {
-            // Do nothing!
+            holder.bind(position)
         }
 
     }
 
-    class BlankViewHolder(parentView: View) : RecyclerView.ViewHolder(parentView)
+    inner class BlankViewHolder(parentView: View) : RecyclerView.ViewHolder(parentView), View.OnClickListener {
+
+        private var numblerItemView: TextView = parentView.findViewById(R.id.numberItemView)
+
+        init {
+            Log.d("TAG", "Hello from init")
+            parentView.setOnClickListener(this)
+        }
+
+        fun bind(position: Int) {
+            numblerItemView.text = position.toString()
+        }
+
+        override fun onClick(v: View?) {
+            val toastMessage = "You clicked on ${numblerItemView.text}"
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+        }
+
+    }
 
 }
