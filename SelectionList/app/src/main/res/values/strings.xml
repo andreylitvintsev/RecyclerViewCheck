@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RecyclerViewCheck</string>
+
+    <string name="selectionInfo">Selected: %1$d</string>
 </resources>

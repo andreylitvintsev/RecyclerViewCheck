@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.view.ActionMode
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.selection.ItemDetailsLookup
@@ -21,7 +22,7 @@ class BlankListFragment : ListFragment<BlankListFragment.BlankViewHolder>() {
     private lateinit var selectionTracker: SelectionTracker<Long>
 
     companion object {
-        val ITEM_COUNT_ARGUMENT = "ItemCount"
+        const val ITEM_COUNT_ARGUMENT = "ItemCount"
     }
 
     private var count: Int = 0
@@ -48,11 +49,13 @@ class BlankListFragment : ListFragment<BlankListFragment.BlankViewHolder>() {
 
             selectionTracker.addObserver(object : SelectionTracker.SelectionObserver<Long>() {
                 override fun onSelectionChanged() {
-                    if (actionMode == null) {
+                    Log.d("TEA", "onSelectionChanged")
+                    if (actionMode == null && selectionTracker.hasSelection()) {
                         actionMode = (activity as? AppCompatActivity)?.startSupportActionMode(SelectionActionModeCallback())
                     }
 
-                    actionMode?.title = "Selected: ${selectionTracker.selection.size()}" // TODO: вынести в отдельный файл
+                    actionMode?.title = context!!.getString(R.string.selectionInfo,
+                            selectionTracker.selection.size())
                 }
             })
         }
@@ -155,8 +158,10 @@ class BlankListFragment : ListFragment<BlankListFragment.BlankViewHolder>() {
         override fun onPrepareActionMode(p0: ActionMode?, p1: Menu?): Boolean = false
 
         override fun onDestroyActionMode(p0: ActionMode?) {
-            selectionTracker.clearSelection()
+            Log.d("TEA", "onDestroyActionMode")
             actionMode = null
+
+            selectionTracker.clearSelection()
         }
 
         override fun onActionItemClicked(p0: ActionMode?, p1: MenuItem?): Boolean = true
