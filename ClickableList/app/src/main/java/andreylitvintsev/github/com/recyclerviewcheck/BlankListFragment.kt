@@ -45,6 +45,7 @@ class BlankListFragment : ListFragment<BlankListFragment.BlankViewHolder>() {
         }
 
         override fun onBindViewHolder(holder: BlankViewHolder, position: Int) {
+            Log.d("TAG", "$position")
             holder.bind(position)
         }
 

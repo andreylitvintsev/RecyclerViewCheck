@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 
 
-open abstract class ListFragment<VH : RecyclerView.ViewHolder> : Fragment() {
+abstract class ListFragment<VH : RecyclerView.ViewHolder> : Fragment() {
 
-    private var recyclerView: RecyclerView? = null
+    protected var recyclerView: RecyclerView? = null
 
     protected var adapter : RecyclerView.Adapter<in VH>? // TODO: what is 'in'
         get() = recyclerView?.adapter
