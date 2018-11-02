@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RecyclerViewCheck</string>
+
+    <string name="addItem">Add item in the end</string>
+    <string name="removeItem">Remove item from the end</string>
+    <string name="addItemAtRandomPosition">Add item at random position</string>
+    <string name="removeRandomItem">Remove random item</string>
+    <string name="list_header">It\'s header!</string>
+</resources>
